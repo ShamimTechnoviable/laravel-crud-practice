@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,10 @@ Route::post('/students', [StudentController::class, 'store']);
 Route::get('/books', [BookController::class, 'index']);
 Route::get('/books/create', [BookController::class, 'create']);
 Route::post('/books', [BookController::class, 'store']);
+
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/create', [ProductController::class, 'create']);
+Route::post('/products', [ProductController::class, 'store']);
 
 Route::get('/', function () {
     return view('home');

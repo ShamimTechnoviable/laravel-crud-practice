@@ -8,7 +8,7 @@
 
     <ul>
         @forelse($books as $book)
-            <li><strong>{{ $book->name }}</strong> - {{ $book->department }} ({{ $book->email }})</li>
+            <li><strong>{{ $book->title }}</strong> - {{ $book->author }} ({{ $book->price }})</li>
         @empty
             <li>ডেটাবেজে কোনো বইয়ের তালিকা নেই!</li>
         @endforelse
