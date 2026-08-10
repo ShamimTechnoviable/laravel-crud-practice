@@ -8,10 +8,30 @@
         @csrf
         @method('PUT')
         
-        <p>প্রোডাক্টের নাম: <input type="text" name="name" value="{{ $product->name }}" required></p>
-        <p>বিবরণ: <textarea name="description" required>{{ $product->description }}</textarea></p>
-        <p>দাম: <input type="number" name="price" value="{{ $product->price }}" required></p>
-        
+        <p>
+            প্রোডাক্টের নাম: 
+            <input type="text" name="name" value="{{ old('name', $product->name) }}">
+            @error('name')
+                <span style="color: red; display: block;">{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            বিবরণ: 
+            <textarea name="description">{{ old('description', $product->description) }}</textarea>
+            @error('description')
+                <span style="color: red; display: block;">{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            দাম: 
+            <input type="number" name="price" value="{{ old('price', $product->price) }}">
+            @error('price')
+                <span style="color: red; display: block;">{{ $message }}</span>
+            @enderror
+        </p>
+
         <button type="submit">আপডেট করুন</button>
     </form>
     

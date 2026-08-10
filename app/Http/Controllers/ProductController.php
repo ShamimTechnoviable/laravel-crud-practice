@@ -27,6 +27,13 @@ public function edit($id)
 // ২. পরিবর্তন করা তথ্য সেভ করবে
 public function update(Request $request, $id)
 {
+        // ১. আপডেট ইনপুট চেক করা
+    $request->validate([
+        'name'        => 'required|min:3',
+        'description' => 'required',
+        'price'       => 'required|numeric|min:1',
+    ]);
+
     $product = Product::findOrFail($id);
     $product->update([
         'name'        => $request->name,
@@ -34,7 +41,7 @@ public function update(Request $request, $id)
         'price'       => $request->price,
     ]);
 
-    return redirect('/products');
+    return redirect('/products')->with('success', 'প্রোডাক্ট সফলভাবে আপডেট করা হয়েছে!');
 }
 
 // ৩. ডেটাবেজ থেকে মুছে ফেলবে
@@ -48,12 +55,20 @@ public function destroy($id)
 
     public function store(Request $request)
     {
+
+    // ১. ফর্মের ইনপুট চেক করা (Validation)
+    $request->validate([
+        'name'        => 'required|min:3',
+        'description' => 'required',
+        'price'       => 'required|numeric|min:1',
+      ]);
+
         Product::create([
             'name'        => $request->name,
             'description' => $request->description,
             'price'       => $request->price,
         ]);
 
-        return redirect('/products');
+        return redirect('/products')->with('success', 'নতুন প্রোডাক্ট সফলভাবে যোগ করা হয়েছে!');
     }
 }

@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html>
-<head><title>Add Product</title></head>
+<head><title>Create Product</title></head>
 <body>
     <h2>নতুন প্রোডাক্ট যোগ করুন</h2>
 
     <form action="/products" method="POST">
         @csrf
-        <p>প্রোডাক্টের নাম: <input type="text" name="name" required></p>
-        <p>বিবরণ: <textarea name="description" required></textarea></p>
-        <p>দাম: <input type="number" name="price" required></p>
+        
+        <p>
+            প্রোডাক্টের নাম: 
+            <input type="text" name="name" value="{{ old('name') }}">
+            @error('name')
+                <span style="color: red; display: block;">{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            বিবরণ: 
+            <textarea name="description">{{ old('description') }}</textarea>
+            @error('description')
+                <span style="color: red; display: block;">{{ $message }}</span>
+            @enderror
+        </p>
+
+        <p>
+            দাম: 
+            <input type="number" name="price" value="{{ old('price') }}">
+            @error('price')
+                <span style="color: red; display: block;">{{ $message }}</span>
+            @enderror
+        </p>
+
         <button type="submit">সেভ করুন</button>
     </form>
     
     <br>
-    <a href="/products">তালিকায় যান</a>
+    <a href="/products">তালিকায় ফিরে যান</a>
 </body>
 </html>

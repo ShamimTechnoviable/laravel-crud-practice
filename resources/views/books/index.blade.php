@@ -4,6 +4,11 @@
     <title>Books List</title>
 </head>
 <body>
+    @if(session('success'))
+     <p style="color: green; font-weight: bold;">
+        {{ session('success') }}
+     </p>
+    @endif
     <h2>বইয়ের তালিকা</h2>
     <a href="/books/create">+ নতুন বই যোগ করুন</a>
 

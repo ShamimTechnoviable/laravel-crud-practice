@@ -27,6 +27,12 @@ public function edit($id)
 // ২. পরিবর্তন করা তথ্য সেভ করবে
 public function update(Request $request, $id)
 {
+  $request->validate([
+        'title'  => 'required|min:2',
+        'author' => 'required',
+        'price'  => 'required|numeric|min:1',
+    ]);
+
     $book = Book::findOrFail($id);
     $book->update([
         'title'  => $request->title,
@@ -34,7 +40,7 @@ public function update(Request $request, $id)
         'price'  => $request->price,
     ]);
 
-    return redirect('/books');
+    return redirect('/books')->with('success', 'বইয়ের তথ্য আপডেট করা হয়েছে!');
 }
 
 // ৩. ডেটাবেজ থেকে মুছে ফেলবে
@@ -48,11 +54,17 @@ public function destroy($id)
 
   public function store(Request $request)
   {
+    $request->validate([
+        'title'  => 'required|min:2',
+        'author' => 'required',
+        'price'  => 'required|numeric|min:1',
+    ]);
+
     Book::create([
     'title'  => $request->title,
     'author' => $request->author,
     'price'  => $request->price,
    ]);
-    return Redirect('/books');
+    return redirect('/books')->with('success', 'নতুন বই সফলভাবে যোগ করা হয়েছে!');
   }
 }

@@ -4,6 +4,11 @@
     <title>Student List</title>
 </head>
 <body>
+    @if(session('success'))
+     <p style="color: green; font-weight: bold;">
+        {{ session('success') }}
+     </p>
+    @endif
     <h2>ছাত্রদের তালিকা</h2>
     <a href="/students/create">+ নতুন ছাত্র যোগ করুন</a>
 

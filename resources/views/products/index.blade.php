@@ -2,6 +2,11 @@
 <html>
 <head><title>Product List</title></head>
 <body>
+    @if(session('success'))
+     <p style="color: green; font-weight: bold;">
+        {{ session('success') }}
+     </p>
+    @endif
     <h2>প্রোডাক্টের তালিকা</h2>
     <a href="/products/create">+ নতুন প্রোডাক্ট যোগ করুন</a>
 
