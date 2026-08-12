@@ -13,6 +13,9 @@
     <ul>
         @forelse($products as $product)
             <li>
+             @if($product->image)
+               <img src="{{ asset('storage/' . $product->image) }}" width="60" style="vertical-align: middle; margin-right: 10px;">
+             @endif
                 <strong>{{ $product->name }}</strong> - {{ $product->description }} - ({{ $product->price }} টাকা)
                 
                 {{-- এডিট লিংক --}}
