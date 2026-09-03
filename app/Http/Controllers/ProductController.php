@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,20 +15,23 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        return view('products.create', compact('categories'));
     }
 
     // ১. এডিট ফর্ম দেখাবে
 public function edit($id)
 {
     $product = Product::findOrFail($id);
-    return view('products.edit', compact('product'));
+    $categories = Category::all();
+    return view('products.edit', compact('product', 'categories'));
 }
 
 // ২. পরিবর্তন করা তথ্য সেভ করবে
 public function update(Request $request, $id)
 {
     $request->validate([
+        'category_id' => 'required|exists:categories,id',
         'name'        => 'required|min:3',
         'description' => 'required',
         'price'       => 'required|numeric|min:1',
@@ -48,6 +52,7 @@ public function update(Request $request, $id)
     }
 
     $product->update([
+        'category_id' => $request->category_id,
         'name'        => $request->name,
         'description' => $request->description,
         'price'       => $request->price,
@@ -75,6 +80,7 @@ public function destroy($id)
     public function store(Request $request)
 {
     $request->validate([
+        'category_id' => 'required|exists:categories,id',
         'name'        => 'required|min:3',
         'description' => 'required',
         'price'       => 'required|numeric|min:1',
@@ -88,6 +94,7 @@ public function destroy($id)
     }
 
     Product::create([
+        'category_id' => $request->category_id,
         'name'        => $request->name,
         'description' => $request->description,
         'price'       => $request->price,
